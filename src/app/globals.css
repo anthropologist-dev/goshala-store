@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; }
+body { @apply bg-cream text-earth font-sans antialiased; }
+h1, h2, h3, h4 { @apply font-serif text-leaf-dark; }
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-leaf text-cream hover:bg-leaf-dark; }
+  .btn-accent { @apply btn bg-saffron text-white hover:bg-saffron-light; }
+  .btn-outline { @apply btn border border-leaf text-leaf hover:bg-leaf hover:text-cream; }
+  .input { @apply w-full rounded-lg border border-earth/20 bg-white px-3 py-2.5 text-sm text-earth outline-none focus:border-leaf focus:ring-2 focus:ring-leaf/20; }
+  .label { @apply mb-1 block text-xs font-semibold uppercase tracking-wider text-earth-light; }
+  .card { @apply rounded-2xl bg-white shadow-sm ring-1 ring-earth/5; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.2em] text-saffron; }
+  .prose-store p { @apply mb-4 leading-relaxed; }
+  .prose-store h2 { @apply mb-3 mt-8 text-2xl; }
+  .prose-store ul { @apply mb-4 list-disc space-y-1 pl-5; }
+}
