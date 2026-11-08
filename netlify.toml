@@ -1,0 +1,18 @@
+# Netlify + Supabase. Every push to main migrates the Supabase database and redeploys.
+# One-click: https://app.netlify.com/start/deploy?repository=https://github.com/anthropologist-dev/goshala-store
+[build]
+  command = "npm run db:migrate && npm run db:seed && npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Asked for when someone uses the Deploy to Netlify button
+[template.environment]
+  DATABASE_URL = "Supabase transaction pooler URI (port 6543). Supabase → Connect → Transaction pooler"
+  DIRECT_DATABASE_URL = "Supabase session pooler URI (port 5432), used for migrations. Supabase → Connect → Session pooler"
+  AUTH_SECRET = "Any long random string (40+ characters)"
+  ADMIN_EMAIL = "Email for the admin login"
+  ADMIN_PASSWORD = "Admin password (10+ characters), used once to create the account"
+  NEXT_PUBLIC_SITE_URL = "Your site address, e.g. https://www.srishivasadgurugoshala.com"

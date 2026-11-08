@@ -34,10 +34,22 @@ npm run setup               # creates tables, loads products, creates the admin 
 npm run dev                 # http://localhost:3000, admin at /admin
 ```
 
-## Deploy on Render
+## Deploy
+
+| Option | Cost | Guide |
+|---|---|---|
+| **Supabase + Netlify** (git-based, one click) | Free | [`deploy/SUPABASE.md`](deploy/SUPABASE.md) |
+| Supabase + Render free | Free, sleeps when idle | [`deploy/SUPABASE.md`](deploy/SUPABASE.md) |
+| Oracle Cloud Always Free VM | Free, you run the server | [`deploy/oracle/README.md`](deploy/oracle/README.md) |
+| Render paid web service + Render Postgres | Paid | below |
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/anthropologist-dev/goshala-store)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/anthropologist-dev/goshala-store)
+
+### Render with its own Postgres (paid)
 
 1. Push this repo to GitHub.
-2. In Render: **New → Blueprint**, pick the repo. `render.yaml` creates the web service and a Postgres database.
+2. In Render, create a Postgres database, then **New → Blueprint** with this repo and set `DATABASE_URL` to the database's internal URL and `plan: starter` in `render.yaml`.
 3. Set `ADMIN_EMAIL` and `ADMIN_PASSWORD` when prompted. Migrations and seeding run on every deploy (seeding never overwrites existing data).
 4. Log in at `/admin` → **Settings**: add your **UPI ID** (UPI is hidden at checkout until you do), GSTIN if registered, and check the address.
 5. Point `www.srishivasadgurugoshala.com` at the Render service (Render → Settings → Custom domains), then update DNS at Hostinger.

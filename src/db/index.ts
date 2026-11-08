@@ -1,18 +1,13 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import * as schema from "./schema";
+import { poolConfig } from "./pool-config";
 
 const globalForDb = globalThis as unknown as { pool?: Pool };
 
-const pool =
-  globalForDb.pool ??
-  new Pool({
-    connectionString: process.env.DATABASE_URL,
-    max: 5,
-    // Render's managed Postgres requires TLS on external connections
-    ssl: process.env.DATABASE_URL?.includes("sslmode=require") ? { rejectUnauthorized: false } : undefined,
-  });
-if (process.env.NODE_ENV !== "production") globalForDb.pool = pool;
+// pg doesn't open a connection until the first query, so this is safe at build time.
+const pool = globalForDb.pool ?? new Pool(poolConfig());
+globalForDb.pool = pool;
 
 export const db = drizzle(pool, { schema });
 export type DB = typeof db;
